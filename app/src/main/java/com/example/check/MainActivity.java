@@ -1,9 +1,12 @@
 package com.example.check;
 
+import android.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -23,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     int image[]={R.drawable.ic_account_balance_black_24dp,R.drawable.book,R.drawable.ic_account_balance_black_24dp};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         c1=findViewById(R.id.c1);
@@ -46,11 +52,25 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 myAdapter=new MyAdapter(getApplicationContext(),arrayList,image);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
                 recyclerView.setAdapter(myAdapter);
                 //textView.setText(stringBuilder);
+                c1.setVisibility(View.GONE);
+                c2.setVisibility(View.GONE);
+                c3.setVisibility(View.GONE);
+                button.setVisibility(View.GONE);
             }
         });
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId()==R.id.home){
+            c1.setVisibility(View.VISIBLE);
+            c2.setVisibility(View.VISIBLE);
+            c3.setVisibility(View.VISIBLE);
+            button.setVisibility(View.VISIBLE);
+        }
+        return true;
     }
 }

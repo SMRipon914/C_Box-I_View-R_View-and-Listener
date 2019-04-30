@@ -3,12 +3,14 @@ package com.example.check;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,11 +39,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int i) {
 
 
         myViewHolder.textView.setText(arrayList.get(i));
         myViewHolder.imageView.setImageResource(image[i]);
+        myViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("aaa", "onClick: is clicked ");
+              String vv=myViewHolder.textView.getText().toString();
+              if (vv.equals("Java")){
+                  Toast.makeText(context,"Java is clicked",Toast.LENGTH_SHORT).show();
+              }else if (vv.equals("C Programming")){
+                  Toast.makeText(context,"C Programming is clicked",Toast.LENGTH_SHORT).show();
+              }
+
+            }
+        });
 
     }
 
